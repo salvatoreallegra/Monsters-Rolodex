@@ -3,18 +3,14 @@ import React, { Component } from "react";
 import "./App.css";
 
 class App extends Component {
+  componentDidMount() {
+    fetch("http://jsonplaceholder.typicode.com/users")
+      .then((res) => res.json())
+      .then((users) => this.setState({ monsters: users }));
+  }
   constructor() {
     super();
-    this.state = {
-      monsters: [
-        { id: 1, name: "Frankenstein" },
-        { id: 2, name: "Sea Creature" },
-        { id: 3, name: "Covid-19 Zombie" },
-        { id: 4, name: "Volcano DragonFly" },
-        { id: 5, name: "Chucki Reborn" },
-        { id: 6, name: "Tele-Evangelist" },
-      ],
-    };
+    this.state = { monsters: [] };
   }
   render() {
     return (
