@@ -11,13 +11,24 @@ class App extends Component {
   }
   constructor() {
     super();
-    this.state = { monsters: [] };
+    this.state = {
+      monsters: [],
+      searchField: "",
+    };
   }
   render() {
+    const { monsters, searchField } = this.state;
+    const filteredMonsters = monsters.filter((monsters) =>
+      monsters.name.toLowerCase().includes(searchField.toLowerCase())
+    );
     return (
       <div className="App">
-        <h1>List of Monsters Ball</h1>
-        <CardList monsters={this.state.monsters} />
+        <input
+          type="search"
+          placeholder="search monsters rolodex"
+          onChange={(e) => this.setState({ searchField: e.target.value })}
+        />
+        <CardList monsters={filteredMonsters} />
       </div>
     );
   }
